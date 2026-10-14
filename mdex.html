@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>دعوت‌نامه کلاس هوش مصنوعی و مهندسی پزشکی</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --navy: #102b4e;
+  --blue: #194d7a;
+  --gold: #c5a15e;
+  --light: #f4f7fb;
+  --ink: #26374a;
+  --muted: #718096;
+  --line: #dce5ef;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: #e9edf3;
+  color: var(--ink);
+  font-family: "Vazirmatn", Tahoma, sans-serif;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px;
+  background: var(--navy);
+}
+
+button {
+  cursor: pointer;
+  border: 1px solid var(--gold);
+  border-radius: 7px;
+  padding: 8px 14px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--gold);
+  color: var(--navy);
+}
+
+button.secondary {
+  background: transparent;
+  color: white;
+}
+
+.hint {
+  text-align: center;
+  padding: 8px;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.page {
+  position: relative;
+  isolation: isolate;
+  width: 210mm;
+  height: 297mm;
+  margin: 15px auto;
+  padding: 18mm 17mm 19mm;
+  background: white;
+  overflow: hidden;
+  box-shadow: 0 5px 20px #102b4e14;
+  page-break-after: always;
+  break-after: page;
+}
+
+.page:last-child {
+  page-break-after: auto;
+  break-after: auto;
+}
+
+.page::before {
+  content: "";
+  position: absolute;
+  inset: 7mm;
+  border: 1px solid var(--gold);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.page::after {
+  content: "";
+  position: absolute;
+  top: 7mm;
+  right: 7mm;
+  width: 12mm;
+  height: 12mm;
+  border-top: 2px solid var(--navy);
+  border-right: 2px solid var(--navy);
+  pointer-events: none;
+}
+
+input, textarea, select {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  font-family: inherit;
+  font-size: 11px;
+  line-height: 1.8;
+  color: var(--ink);
+  border: 1px solid #cfdae6;
+  border-radius: 5px;
+  padding: 5px 7px;
+  background: white;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 65px;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #9aa6b5;
+}
+
+label {
+  display: block;
+  font-size: 10px;
+  color: var(--muted);
+  margin-bottom: 3px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid var(--line);
+  color: var(--navy);
+}
+
+.brand > div { min-width: 0; }
+
+.brand-left {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.brand-mark {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--gold);
+  color: var(--gold);
+  border-radius: 50%;
+  font-size: 18px;
+}
+
+.brand-name {
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.8;
+}
+
+.brand-tag {
+  color: var(--muted);
+  font-size: 9px;
+  text-align: left;
+}
+
+.eyebrow {
+  font-size: 10px;
+  color: var(--gold);
+  font-weight: 700;
+  text-align: center;
+}
+
+.cover {
+  background: linear-gradient(145deg, #fff 40%, #f2f6fb);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.cover-main {
+  margin: auto 0;
+  width: 100%;
+}
+
+.cover h1 {
+  color: var(--navy);
+  font-size: 29px;
+  line-height: 1.6;
+  margin: 12px 0;
+  font-weight: 800;
+}
+
+.cover h2 {
+  font-size: 16px;
+  color: var(--blue);
+  font-weight: 600;
+  line-height: 1.9;
+}
+
+.cover-desc {
+  max-width: 100%;
+  margin: 12px auto;
+  font-size: 12px;
+  color: #58677a;
+  line-height: 2;
+}
+
+.cover-title {
+  padding: 12px;
+  background: var(--navy);
+  color: white;
+  border: 1px solid var(--gold);
+  border-radius: 9px;
+  margin: 18px 0;
+  overflow: hidden;
+}
+
+.cover-title input {
+  background: transparent;
+  color: white;
+  border: 0;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 2;
+}
+
+.gold-line {
+  height: 2px;
+  width: 40mm;
+  max-width: 50%;
+  background: var(--gold);
+  margin: 14px auto;
+}
+
+.cover-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  text-align: right;
+  margin: 16px 0;
+}
+
+.meta-card {
+  min-width: 0;
+  padding: 9px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #ffffffdc;
+}
+
+.meta-card strong, .meta-card span {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.meta-card strong {
+  font-size: 10px;
+  color: var(--navy);
+}
+
+.meta-card span {
+  font-size: 11px;
+  line-height: 1.9;
+}
+
+.cover-bottom {
+  margin-bottom: 3mm;
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.heading {
+  font-size: 21px;
+  line-height: 1.7;
+  color: var(--navy);
+  font-weight: 800;
+  margin: 10px 0 2px;
+}
+
+.subheading {
+  font-size: 10px;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.section {
+  color: var(--navy);
+  font-size: 12px;
+  font-weight: 800;
+  padding-right: 8px;
+  border-right: 3px solid var(--gold);
+  margin: 13px 0 8px;
+}
+
+.letter {
+  font-size: 11px;
+  line-height: 2.1;
+  text-align: justify;
+}
+
+.letter p { margin: 5px 0; }
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 7px;
+}
+
+.card {
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: #f9fbfd;
+  padding: 8px;
+  border-radius: 6px;
+  overflow-wrap: anywhere;
+}
+
+.card input, .card textarea { background: transparent; }
+
+table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 9px;
+  margin-top: 6px;
+}
+
+th, td {
+  border: 1px solid var(--line);
+  padding: 5px;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+th {
+  background: var(--navy);
+  color: white;
+  font-weight: 600;
+}
+
+td input {
+  border: 0;
+  padding: 2px;
+  font-size: 9px;
+  background: transparent;
+}
+
+.note {
+  margin-top: 10px;
+  background: #fbf7ed;
+  border-right: 3px solid var(--gold);
+  padding: 9px;
+  font-size: 10px;
+  overflow-wrap: anywhere;
+}
+
+.form-panel {
+  background: var(--light);
+  border: 1px solid #d6e1ef;
+  padding: 11px;
+  border-radius: 9px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 9px;
+}
+
+.field-full { grid-column: 1 / -1; }
+
+.contact {
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  font-size: 10px;
+  overflow-wrap: anywhere;
+}
+
+.contact a {
+  color: var(--blue);
+  text-decoration: none;
+  direction: ltr;
+  unicode-bidi: embed;
+  font-size: 10px;
+}
+
+.signatures {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.signature {
+  min-width: 0;
+  text-align: center;
+  border: 1px solid var(--line);
+  padding: 8px;
+  border-radius: 7px;
+  font-size: 10px;
+}
+
+.signature input {
+  border: 0;
+  border-bottom: 1px dashed var(--gold);
+  border-radius: 0;
+  margin-top: 8px;
+  text-align: center;
+}
+
+.footer {
+  position: absolute;
+  bottom: 10mm;
+  right: 17mm;
+  left: 17mm;
+  border-top: 1px solid var(--line);
+  padding-top: 5px;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 9px;
+}
+
+@page {
+  size: A4 portrait;
+  margin: 0;
+}
+
+@media print {
+  html, body {
+    width: 210mm;
+    margin: 0;
+    padding: 0;
+    background: white;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .toolbar, .hint {
+    display: none !important;
+  }
+
+  .page {
+    width: 210mm;
+    height: 297mm;
+    min-height: 0;
+    margin: 0;
+    padding: 18mm 17mm 19mm;
+    box-shadow: none;
+    overflow: hidden;
+    break-after: page;
+    page-break-after: always;
+  }
+
+  .page:last-child {
+    break-after: auto;
+    page-break-after: auto;
+  }
+
+  input, textarea, select {
+    background: transparent !important;
+    color: #26374a;
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: transparent !important;
+  }
+
+  .cover-title input { color: white; }
+}
+
+@media screen and (max-width: 700px) {
+  .page {
+    width: 100%;
+    height: auto;
+    min-height: 297mm;
+    padding: 35px 25px 65px;
+    margin: 10px 0;
+  }
+
+.cover { min-height: 760px; }
+
+  .footer {
+    left: 25px;
+    right: 25px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="toolbar">
+  <button onclick="window.print()">چاپ / ذخیره PDF</button>
+  <button class="secondary" onclick="saveData()">ذخیره اطلاعات</button>
+  <button class="secondary" onclick="loadData()">بازیابی اطلاعات</button>
+  <button class="secondary" onclick="resetForm()">پاک کردن فرم</button>
+</div>
+
+<div class="hint">
+  مشخصات مهمان را در صفحه سوم وارد کنید. سپس برای خروجی نهایی، چاپ یا ذخیره PDF را بزنید.
+</div>
+
+<!-- صفحه اول: جلد دعوت‌نامه -->
+<section class="page cover">
+
+  <div class="brand">
+    <div class="brand-left">
+      <div class="brand-mark">✦</div>
+      <div class="brand-name">
+        دانشگاه آزاد اسلامی<br>
+        واحد تهران مرکز<br>
+        واحد هاشمی رفسنجانی
+      </div>
+    </div>
+    <div class="brand-tag">
+      دعوت‌نامه آموزشی<br>
+      ویژه دانشجویان و علاقه‌مندان
+    </div>
+  </div>
+
+  <div class="cover-main">
+    <div class="eyebrow">ACADEMIC INVITATION</div>
+
+    <h1>دعوت‌نامه رسمی</h1>
+    <h2>برای حضور در یک کلاس آموزشی تخصصی</h2>
+
+    <div class="gold-line"></div>
+
+    <div class="cover-title">
+      <input id="courseTitle"
+        value="مقدمه‌ای بر هوش مصنوعی و کاربرد آن در مهندسی پزشکی"
+        aria-label="عنوان کلاس">
+    </div>
+
+    <div class="cover-desc">
+      با افتخار از شما دعوت می‌کنیم تا در این کلاس آموزشی حضور به‌هم رسانید؛
+      فرصتی برای آشنایی با مفاهیم هوش مصنوعی و نقش رو‌به‌رشد آن در مهندسی پزشکی،
+      فناوری‌های سلامت و آینده پژوهش‌های پزشکی.
+    </div>
+
+    <div class="cover-meta">
+      <div class="meta-card">
+        <strong>تاریخ برگزاری</strong>
+        <span>۱۴۰۵/۰۷/۲۵</span>
+      </div>
+
+      <div class="meta-card">
+        <strong>ساعت برگزاری</strong>
+        <span>۰۹:۴۶</span>
+      </div>
+
+      <div class="meta-card" style="grid-column:1/-1">
+        <strong>محل برگزاری</strong>
+        <span>دانشگاه آزاد اسلامی، واحد تهران مرکز</span>
+        <span>واحد هاشمی رفسنجانی، ساختمان یک، کلاس ۱۲۰۹</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cover-bottom">
+    <div class="gold-line"></div>
+    <strong style="color:var(--navy)">
+      مدرس کلاس: استاد محمد پور ارجمند
+    </strong>
+    <p>حضور ارزشمند شما، مایه افتخار و دلگرمی ماست.</p>
+    <p>صفحه ۱ از ۳</p>
+  </div>
+
+</section>
+
+<!-- صفحه دوم: متن دعوت و اطلاعات کلاس -->
+<section class="page">
+
+  <div class="brand">
+    <div class="brand-left">
+      <div class="brand-mark">✦</div>
+      <div class="brand-name">
+        دانشگاه آزاد اسلامی<br>
+        واحد تهران مرکز
+      </div>
+    </div>
+    <div class="brand-tag">
+      کلاس تخصصی<br>
+      هوش مصنوعی و مهندسی پزشکی
+    </div>
+  </div>
+
+  <h1 class="heading">متن دعوت</h1>
+  <div class="subheading">به نام دانش، نوآوری و آینده‌ای هوشمندتر</div>
+
+  <div class="letter">
+    <p>
+      جناب آقای / سرکار خانم
+      <input id="guestNameLetter"
+        placeholder="نام و نام خانوادگی مخاطب"
+        style="display:inline-block;width:55%">
+    </p>
+
+    <p>با سلام و احترام؛</p>
+
+    <p>
+      بدین‌وسیله از جنابعالی دعوت می‌شود در کلاس آموزشی
+      «مقدمه‌ای بر هوش مصنوعی و کاربرد آن در مهندسی پزشکی»
+      حضور به‌هم رسانید. این برنامه با هدف آشنایی مقدماتی با مفاهیم
+      هوش مصنوعی و بررسی کاربردهای آن در حوزه مهندسی پزشکی برگزار می‌شود.
+    </p>
+
+    <p>
+      در این کلاس، ضمن آشنایی با مفاهیم پایه، به نمونه‌هایی از کاربرد
+      هوش مصنوعی در تحلیل داده‌های پزشکی، پردازش تصاویر پزشکی،
+      کمک به تشخیص بیماری‌ها، تجهیزات هوشمند پزشکی و مسیرهای نوین
+      پژوهش در این حوزه پرداخته خواهد شد.
+    </p>
+
+    <p>
+      امیدواریم حضور شما فرصتی ارزشمند برای یادگیری، تبادل نظر و آشنایی
+      بیشتر با ظرفیت‌های فناوری‌های نوین در مهندسی پزشکی فراهم آورد.
+      از حضور گرم و همراهی شما صمیمانه استقبال می‌کنیم.
+    </p>
+
+    <p>با احترام،</p>
+    <p><strong>مدرس کلاس: استاد محمد پور ارجمند</strong></p>
+  </div>
+
+  <div class="section">مشخصات برگزاری</div>
+
+<div class="grid">
+    <div class="card">
+      <label>عنوان کلاس</label>
+      <strong style="font-size:11px">
+        مقدمه‌ای بر هوش مصنوعی و کاربرد آن در مهندسی پزشکی
+      </strong>
+    </div>
+
+    <div class="card">
+      <label>مدرس</label>
+      <strong>استاد محمد پور ارجمند</strong>
+    </div>
+
+    <div class="card">
+      <label>تاریخ برگزاری</label>
+      <strong>۱۴۰۵/۰۷/۲۵</strong>
+    </div>
+
+    <div class="card">
+      <label>ساعت برگزاری</label>
+      <strong>۰۹:۴۶</strong>
+    </div>
+
+    <div class="card" style="grid-column:1/-1">
+      <label>محل برگزاری</label>
+      <strong>
+        دانشگاه آزاد اسلامی، واحد تهران مرکز، واحد هاشمی رفسنجانی،
+        ساختمان یک، کلاس ۱۲۰۹
+      </strong>
+    </div>
+  </div>
+
+  <div class="section">محورهای پیشنهادی کلاس</div>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:12%">ردیف</th>
+        <th style="width:52%">محور آموزشی</th>
+        <th>هدف</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>۱</td>
+        <td>آشنایی با هوش مصنوعی و مفاهیم پایه</td>
+        <td>درک مفاهیم اولیه</td>
+      </tr>
+      <tr>
+        <td>۲</td>
+        <td>یادگیری ماشین و یادگیری عمیق</td>
+        <td>شناخت روش‌ها</td>
+      </tr>
+      <tr>
+        <td>۳</td>
+        <td>کاربردها در مهندسی پزشکی</td>
+        <td>نمونه‌های عملی</td>
+      </tr>
+      <tr>
+        <td>۴</td>
+        <td>چالش‌ها، اخلاق و آینده فناوری</td>
+        <td>نگاه پژوهشی</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="note">
+    <strong>یادآوری:</strong>
+    لطفاً در صورت امکان، چند دقیقه پیش از شروع برنامه در محل کلاس حضور داشته باشید.
+  </div>
+
+  <div class="footer">
+    <span>دعوت‌نامه آموزشی</span>
+    <span>صفحه ۲ از ۳</span>
+  </div>
+
+</section>
+
+<!-- صفحه سوم: فرم اطلاعات مهمان -->
+<section class="page">
+
+  <div class="brand">
+    <div class="brand-left">
+      <div class="brand-mark">✦</div>
+      <div class="brand-name">
+        دانشگاه آزاد اسلامی<br>
+        واحد تهران مرکز
+      </div>
+    </div>
+    <div class="brand-tag">
+      تأیید حضور<br>
+      و اطلاعات مهمان
+    </div>
+  </div>
+
+  <h1 class="heading">تأیید حضور و اطلاعات تکمیلی</h1>
+
+  <div class="subheading">
+    لطفاً اطلاعات زیر را تکمیل فرمایید تا مشخصات شما برای هماهنگی کلاس ثبت شود.
+  </div>
+
+  <div class="form-panel">
+    <div class="section" style="margin-top:0">اطلاعات مهمان</div>
+
+    <div class="form-grid">
+      <div>
+        <label for="guestName">نام و نام خانوادگی *</label>
+        <input id="guestName" name="guestName" required
+          placeholder="نام کامل خود را وارد کنید">
+      </div>
+
+      <div>
+        <label for="mobile">شماره تماس *</label>
+        <input id="mobile" name="mobile" type="tel" required
+          placeholder="شماره تلفن همراه">
+      </div>
+
+      <div>
+        <label for="email">ایمیل مهمان</label>
+        <input id="email" name="email" type="email"
+          placeholder="example@email.com">
+      </div>
+
+      <div>
+        <label for="field">رشته تحصیلی / تخصص</label>
+        <input id="field" name="field"
+          placeholder="مثلاً مهندسی پزشکی">
+      </div>
+
+      <div>
+        <label for="university">دانشگاه یا محل فعالیت</label>
+        <input id="university" name="university"
+          placeholder="نام دانشگاه یا سازمان">
+      </div>
+
+      <div>
+        <label for="degree">مقطع تحصیلی</label>
+        <select id="degree" name="degree">
+          <option value="">انتخاب کنید</option>
+          <option>کارشناسی</option>
+          <option>کارشناسی ارشد</option>
+          <option>دکتری</option>
+          <option>عضو هیئت علمی</option>
+          <option>سایر</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="attendance">وضعیت حضور</label>
+        <select id="attendance" name="attendance">
+          <option value="">انتخاب کنید</option>
+          <option>در کلاس حضور خواهم داشت</option>
+          <option>نیازمند اطلاعات بیشتر هستم</option>
+          <option>امکان حضور ندارم</option>
+        </select>
+      </div>
+
+<div>
+        <label for="companions">تعداد همراهان، در صورت مجاز بودن</label>
+        <input id="companions" name="companions"
+          type="number" min="0" value="0">
+      </div>
+
+      <div class="field-full">
+        <label for="message">پرسش‌ها یا توضیحات مهمان</label>
+        <textarea id="message" name="message"
+          placeholder="اگر پرسش یا توضیحی دارید، اینجا بنویسید"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">راه‌های ارتباطی و اطلاعات کلاس</div>
+
+  <div class="contact">
+    <div class="grid">
+      <div>
+        <label>ایمیل برگزارکننده</label>
+        <a href="mailto:erfantaghizadeh06@gmail.com">
+          erfantaghizadeh06@gmail.com
+        </a>
+      </div>
+
+      <div>
+        <label>مدرس کلاس</label>
+        <strong>استاد محمد پور ارجمند</strong>
+      </div>
+
+      <div class="field-full">
+        <label>نشانی محل برگزاری</label>
+        دانشگاه آزاد اسلامی، واحد تهران مرکز، واحد هاشمی رفسنجانی،
+        ساختمان یک، کلاس ۱۲۰۹
+      </div>
+
+      <div>
+        <label>تاریخ</label>
+        <strong>۱۴۰۵/۰۷/۲۵</strong>
+      </div>
+
+      <div>
+        <label>ساعت</label>
+        <strong>۰۹:۴۶</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="signatures">
+    <div class="signature">
+      <strong>تأیید اطلاعات مهمان</strong>
+      <input placeholder="نام و امضای مهمان">
+    </div>
+
+    <div class="signature">
+      <strong>مسئول برگزاری / مدرس</strong>
+      <input value="استاد محمد پور ارجمند">
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:18px">
+    <div class="gold-line"></div>
+    <strong style="color:var(--navy);font-size:14px">
+      منتظر دیدار و همراهی شما هستیم
+    </strong>
+    <div style="font-size:10px;color:var(--muted)">
+      گامی در مسیر پیوند هوش مصنوعی و مهندسی پزشکی
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>با احترام و سپاس</span>
+    <span>صفحه ۳ از ۳</span>
+  </div>
+
+</section>
+
+<script>
+const fields = () => Array.from(
+  document.querySelectorAll(
+    '.page input, .page textarea, .page select'
+  )
+);
+
+function syncGuest() {
+  const name = document.getElementById('guestName').value;
+  document.getElementById('guestNameLetter').value = name;
+}
+
+document.getElementById('guestName')
+  .addEventListener('input', syncGuest);
+
+document.getElementById('guestNameLetter')
+  .addEventListener('input', function () {
+    document.getElementById('guestName').value = this.value;
+  });
+
+function saveData() {
+  try {
+    const data = fields().map(el => el.value);
+    localStorage.setItem(
+      'aiMedicalInvitation',
+      JSON.stringify(data)
+    );
+    alert('اطلاعات در همین مرورگر ذخیره شد.');
+  } catch (error) {
+    alert('ذخیره اطلاعات در این مرورگر ممکن نشد.');
+  }
+}
+
+function loadData() {
+  try {
+    const saved = localStorage.getItem('aiMedicalInvitation');
+
+    if (!saved) {
+      alert('اطلاعات ذخیره‌شده‌ای وجود ندارد.');
+      return;
+    }
+
+    const data = JSON.parse(saved);
+
+    fields().forEach((el, i) => {
+      if (i < data.length) el.value = data[i];
+    });
+
+    syncGuest();
+    alert('اطلاعات بازیابی شد.');
+  } catch (error) {
+    alert('بازیابی اطلاعات انجام نشد.');
+  }
+}
+
+function resetForm() {
+  if (!confirm('اطلاعات واردشده پاک شود؟')) return;
+
+  fields().forEach(el => {
+    if (el.tagName === 'SELECT') {
+      el.selectedIndex = 0;
+    } else if (el.id === 'companions') {
+      el.value = '0';
+    } else if (el.id === 'courseTitle') {
+      el.value =
+        'مقدمه‌ای بر هوش مصنوعی و کاربرد آن در مهندسی پزشکی';
+    } else if (el.id === 'guestNameLetter') {
+      el.value = '';
+    } else if (el.id === 'guestName') {
+      el.value = '';
+    } else if (el.id === 'signatureTeacher') {
+      el.value = 'استاد محمد پور ارجمند';
+    } else {
+      el.value = '';
+    }
+  });
+
+  try {
+    localStorage.removeItem('aiMedicalInvitation');
+  } catch (error) {}
+
+  syncGuest();
+}
+</script>
+
+</body>
+</html>
